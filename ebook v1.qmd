@@ -1,0 +1,45 @@
+---
+title: "System Dynamic Modelling"
+author: "Kent Public Health Observatory"
+date: today
+format: 
+  html: 
+    toc: true
+    toc-depth: 2
+    number-sections: true
+editor: visual
+---
+
+# Summary
+
+text text text
+
+# Systems thinking and operational research
+
+Glossary/explanation of jargon Flow Stock Convertor Switch
+
+# History of the JSNA Population Cohort model in Kent
+
+# Data Sources
+
+add something
+
+# Default Assumptions
+
+# Answering Complex Questions
+
+text text text
+
+# Distinct Components of the Cohort Model
+
+## Smoking
+
+Main inputs: There is a projected smoking population based on the the age distribution and forecasting of Kent's population, combined with smoking rates by age group. This feeds in as *new smokers* to the smokers in the population stock. The flow of new smokers is also impacted by a switch which reduces the number of new smokers i.e. prevents people from starting smoking. This reflects a societal change where approximately 0.5% less people start smoking each year. The smokers in population stock is reduced by the smokers quitting flow. This flow is controlled by two interventions: current smoking cessation service quitters and Allen Carr smoking cessation quitters. The current smoking cessation service quitters
+
+## Weight Management
+
+## Health Checks
+
+# Case Studies
+
+# Other SD Models
