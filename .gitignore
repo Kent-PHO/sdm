@@ -1,0 +1,13 @@
+# Ignore all .html files
+*.html
+
+# Ignore all .css files
+*.css
+
+# Ignore all .js files
+*.js
+
+# Ignore all .woff files
+*.woff
+
+
