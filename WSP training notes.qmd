@@ -36,6 +36,8 @@ Transitions between these states represent disease progression.
 
 Births and migration in feed into the population while deaths and migration out reduce it. An ageing chain runs across the top, incrementing age over time.
 
+![Cohort model main flow simplified overview](images/main-flow.png){fig-alt="Cohort model main flow simplified overview" fig-align="center"}
+
 ### Time Settings
 
 Delta Time (DT) is set to 1 year using ADT (Advanced Delta Time), meaning one calculation per year. Higher DTs (e.g., 1/4) are sometimes used for precision, but DT=1 is sufficient for the cohort model. Furthermore, increasing DTs can increase the running time of the simulation.
@@ -43,6 +45,8 @@ Delta Time (DT) is set to 1 year using ADT (Advanced Delta Time), meaning one ca
 ### Integration Methods
 
 Euler is the default method used. Alternatives like Cycle Time, RK2, and RK4 are possible. Cycle Time is useful for tracking individual transitions (e.g., waiting times). RK methods are rarely used in this context.
+
+![Model run specification](images/model-run-specs.png){fig-alt="Model run specification" fig-align="center"}
 
 ## Arrays in Stella
 
