@@ -66,7 +66,19 @@ Sum, Min, Max, and Mean can be added via the spanner icon next to array elements
 
 ### Key Learning Points from practical exercises on arrays
 
-Two exercises were done 1 - adding basic array on a simple model: in array editor, create an array on hospitals and set the options to Hospital A and Hospital B - you'll need to set indexed to 'Label' and Size to 2. Highlight all the objects in the model and apply the array to all model elements (stocks, flows, converters). You can do this by highlighting all the elements and --- In the equation view you can untick 'apply to all' and then set different values for each of your hospitals. Use graphs and dropdowns to visualise results per hospital or in aggregate. 2 - summing when two objects have differing arrays: create a convertor which is arrayed by e.g. sex. In the equation section, link in 3 stocks which are arrayed by sex and local authority and add them up with +. Because the stocks are arrayed by local authority and the convertor isn't, you need to SUM each of the stocks in the equation. 3 - in the array editor, you can create aggregate values for the arrays by clicking on the spanner icon beside the array dimension. 4 - typically, when adding a graph, ou can choose which array dimensions to display. The \* allows you to choose a summary function and the ? allows you to choose the dimension in a drop down in the interface. Note: you may need to add the option as a filter in the interface before you can use it in a graph in the model view.
+Two exercises were done:
+
+Exercise 1 - Adding basic array on a simple hospital model:
+
+1.  In array editor, create an array on hospitals and set the options to Hospital A and Hospital B - you'll need to set indexed to 'Label' and Size to 2.
+
+2.  Highlight all the objects in the model and apply the array to all model elements (stocks, flows, converters). You can do this by highlighting all the elements.
+
+3.  In the equation view you can untick 'apply to all' and then set different values for each of your hospitals.
+
+4.  Use graphs and dropdowns to visualise results per hospital or in aggregate.
+
+Exercise 2 - summing arrayed stocks. The purpose of this exercise was to highlight the importance of understanding which arrays were present in each stock so they could be properly handled when summed in a converter. The SUM function must be used when there is an additional dimension (or array). In the array editor, you can create aggregate values for the arrays by clicking on the spanner icon beside the array dimension. Typically, when adding a graph, you can choose which array dimensions to display. The \* allows you to choose a summary function and the ? allows you to choose the dimension in a drop down in the interface. Note: you may need to add the option as a filter in the interface before you can use it in a graph in the model view.
 
 ## Exporting and Importing Data
 
