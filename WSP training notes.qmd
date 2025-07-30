@@ -10,6 +10,10 @@ format:
 editor: visual
 ---
 
+[Kent JSNA Cohort model](https://www.kpho.org.uk/joint-strategic-needs-assessment/jsna-summary/jsna-population-cohort-model) © 2025 by [Kent County Council](https://www.kent.gov.uk/) is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) ![](https://mirrors.creativecommons.org/presskit/icons/cc.svg){style="font-size: 12pt; font-weight: var(--fontWeightRegular); max-width: 1em; max-height: 1em; margin-left: 0.2em;"}![](https://mirrors.creativecommons.org/presskit/icons/by.svg){style="font-size: 12pt; font-weight: var(--fontWeightRegular); max-width: 1em; max-height: 1em; margin-left: 0.2em;"}![](https://mirrors.creativecommons.org/presskit/icons/nc.svg){style="font-size: 12pt; font-weight: var(--fontWeightRegular); max-width: 1em; max-height: 1em; margin-left: 0.2em;"}![](https://mirrors.creativecommons.org/presskit/icons/sa.svg){style="font-size: 12pt; font-weight: var(--fontWeightRegular); max-width: 1em; max-height: 1em; margin-left: 0.2em;"}
+
+In collaboration with [Whole Systems Partnership](https://www.thewholesystem.co.uk/ "Visit WSP homepage").
+
 # Session Purpose
 
 Led by Aaron Bhavsar, this session introduced the structure, logic, and technical underpinnings of the Kent JSNA cohort model. The goal was to build foundational understanding for analysts working with Stella to simulate population health dynamics in Kent.
