@@ -1,6 +1,7 @@
 # sdm
 System Dynamic modelling
-Test MC
-Extra line added by MC as a test.
-New line
+
+This repository contains training notes and resources for System Dynamics Modelling (SDM) using Stella Architect. It includes information on model structure, data management, and practical tips for effective modelling.
+
+
 
