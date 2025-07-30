@@ -1,5 +1,5 @@
 ---
-title: "WSP Training Notes"
+title: "JSNA Cohort model training notes"
 author: "Kent Public Health Observatory"
 date: today
 format:
