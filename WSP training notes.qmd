@@ -84,11 +84,23 @@ Exercise 2 - summing arrayed stocks. The purpose of this exercise was to highlig
 
 ### Exporting
 
-1 - Choose the table you would like to export. Click Mark for export and name the table. Set the orientation. 2 - Create a blank Excel file locally (not on OneDrive/SharePoint). 3 - Use Model → Export Data, add a link to the local Excel file. Set the data source to the table you want to export, choose “on demand” mode to avoid dynamic linking issues. Select Use Table Settings in the Export Interval. 4 - click on the document icon in the Export field in the Export Links box to complete the export.
+1.  Choose the table you would like to export. Click Mark for export and name the table. Set the orientation.
+
+2.  Create a blank Excel file locally (not on OneDrive/SharePoint).
+
+3.  Use Model → Export Data, add a link to the local Excel file. Set the data source to the table you want to export, choose “on demand” mode to avoid dynamic linking issues. Select Use Table Settings in the Export Interval.
+
+4.  Click on the document icon in the Export field in the Export Links box to complete the export.
 
 ### Importing
 
-Use Model → Import Data and find your file. Set parameters to overwrite existing values. Tips - Use “Make Template” to generate a full import sheet. - Be cautious with version control—avoid overwriting correct values with outdated ones.
+1.  Modify values in the exported spreadsheet
+
+2.  Use Model → Import Data and find your file.
+
+3.  Set parameters to overwrite existing values.
+
+Tips - Use “Make Template” to generate a full import sheet. Be cautious with version control—avoid overwriting correct values with outdated ones.
 
 ## Initialisation Data
 
