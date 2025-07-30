@@ -14,13 +14,15 @@ editor: visual
 
 In collaboration with [Whole Systems Partnership](https://www.thewholesystem.co.uk/ "Visit WSP homepage").
 
-# Session Purpose
+# Session 1 - Initial model set-up – model run specs, arrays, initialisation data, initial model calibration.
+
+## Session Purpose
 
 Led by Aaron Bhavsar, this session introduced the structure, logic, and technical underpinnings of the Kent JSNA cohort model. The goal was to build foundational understanding for analysts working with Stella to simulate population health dynamics in Kent.
 
-# Model Architecture and Flow
+## Model Architecture and Flow
 
-## Core Structure
+### Core Structure
 
 The model simulates population health over 25 years starting from 2018, using annual time steps. It tracks individuals across three health states:
 
@@ -30,62 +32,64 @@ The model simulates population health over 25 years starting from 2018, using an
 
 Transitions between these states represent disease progression.
 
-## Peripheral Components
+### Peripheral Components
 
 Births and migration in feed into the population while deaths and migration out reduce it. An ageing chain runs across the top, incrementing age over time.
 
-## Time Settings
+### Time Settings
 
 Delta Time (DT) is set to 1 year using ADT (Advanced Delta Time), meaning one calculation per year. Higher DTs (e.g., 1/4) are sometimes used for precision, but DT=1 is sufficient for the cohort model. Furthermore, increasing DTs can increase the running time of the simulation.
 
-## Integration Methods
+### Integration Methods
 
 Euler is the default method used. Alternatives like Cycle Time, RK2, and RK4 are possible. Cycle Time is useful for tracking individual transitions (e.g., waiting times). RK methods are rarely used in this context.
 
-# Arrays in Stella
+## Arrays in Stella
 
-## Purpose and Benefits
+### Purpose and Benefits
 
 Arrays allow the model to handle multiple categories (e.g., conditions, age bands, LADs) without duplicating pathways: They enable stratification and scalability. Without arrays, the model would require separate stocks and flows for each category—impractical for complex systems.
 
-## Key Arrays Used
+### Key Arrays Used
 
 -   Conditions: asthma, CHD, COPD, diabetes, heart failure, stroke, SMI, dementia, neuro, LD.
 -   Risk Factors: smoking, blood pressure, etc.
 -   Demographics: gender, age bands, LADs, IMD quintiles.
 
-## Array Editor
+### Array Editor
 
 Accessed via Model → Array Editor. Arrays can be labelled (e.g., “Hospital A”) or numbered (e.g., IMD quintiles as 1–5). Numbered arrays allow direct mathematical operations.
 
-## Array Functions
+### Array Functions
 
 Sum, Min, Max, and Mean can be added via the spanner icon next to array elements. These functions simplify aggregation without needing separate converters.
 
-## Key Learning Points from practical exercises on arrays
+### Key Learning Points from practical exercises on arrays
 
 Two exercises were done 1 - adding basic array on a simple model: in array editor, create an array on hospitals and set the options to Hospital A and Hospital B - you'll need to set indexed to 'Label' and Size to 2. Highlight all the objects in the model and apply the array to all model elements (stocks, flows, converters). You can do this by highlighting all the elements and --- In the equation view you can untick 'apply to all' and then set different values for each of your hospitals. Use graphs and dropdowns to visualise results per hospital or in aggregate. 2 - summing when two objects have differing arrays: create a convertor which is arrayed by e.g. sex. In the equation section, link in 3 stocks which are arrayed by sex and local authority and add them up with +. Because the stocks are arrayed by local authority and the convertor isn't, you need to SUM each of the stocks in the equation. 3 - in the array editor, you can create aggregate values for the arrays by clicking on the spanner icon beside the array dimension. 4 - typically, when adding a graph, ou can choose which array dimensions to display. The \* allows you to choose a summary function and the ? allows you to choose the dimension in a drop down in the interface. Note: you may need to add the option as a filter in the interface before you can use it in a graph in the model view.
 
-# Exporting and Importing Data
+## Exporting and Importing Data
 
-## Exporting
+### Exporting
 
 1 - Choose the table you would like to export. Click Mark for export and name the table. Set the orientation. 2 - Create a blank Excel file locally (not on OneDrive/SharePoint). 3 - Use Model → Export Data, add a link to the local Excel file. Set the data source to the table you want to export, choose “on demand” mode to avoid dynamic linking issues. Select Use Table Settings in the Export Interval. 4 - click on the document icon in the Export field in the Export Links box to complete the export.
 
-## Importing
+### Importing
 
 Use Model → Import Data and find your file. Set parameters to overwrite existing values. Tips - Use “Make Template” to generate a full import sheet. - Be cautious with version control—avoid overwriting correct values with outdated ones.
 
-# Initialisation Data
+## Initialisation Data
 
 The key data sources used to initialise the model are as follows: - Population, deaths, migration from housing-led projections - IMD and condition prevalences (used for stratification and adjustments) - Ethnicity (used only in the health checks module to boost attendance in targeted areas).
 
-## How Data Feeds the Model
+### How Data Feeds the Model
 
 Prevalence rates (non, single, multiple) are calculated and used to initialise stocks. These rates are arrayed by gender, condition, and age band. Graphical converters adjust values over time.
 
-# Navigation and Debugging
+## Navigation and Debugging
 
 Finding Elements - Use Find → Arrayed by to locate where arrays are used. - Use Find → Variable Name to locate specific converters or stocks. - Use Causes/Uses to trace dependencies and relationships.
 
 Ghosting Ghosted elements are visual duplicates used to simplify layout. They retain full functionality and are linked to the original.
+
+# Session 2 - Calculation and use of risk factors including IMD
