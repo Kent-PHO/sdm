@@ -121,3 +121,56 @@ Finding Elements - Use Find → Arrayed by to locate where arrays are used. - Us
 Ghosting Ghosted elements are visual duplicates used to simplify layout. They retain full functionality and are linked to the original.
 
 # Session 2 - Calculation and use of risk factors including IMD
+
+## Session Purpose
+
+This session focused on understanding how **risk factors** are represented and manipulated within the Kent JSNA cohort model. The goal was to clarify how these inputs influence health outcomes and model flows, particularly in the context of **scenario testing** and **targeted interventions**.
+
+## Risk Factors in the Interface
+
+### Structure and Navigation
+
+- The **Risk Factors** section of the model interface includes two key components:
+  - **Trend data** sourced from the Health Survey for England, displayed as annual compounded changes.
+  - **Risk ratios** used directly in the model, stratified by **condition** and **gender**.
+- Users can switch between different risk factors using dropdown menus and view how each affects specific health conditions.
+
+### Functional Role in the Model
+
+- Risk ratios are used to **adjust transition probabilities** between health states (e.g., from no condition to single condition).
+- These ratios are applied **uniformly across the population**, meaning any change affects all individuals equally, regardless of subgroup.
+
+## Model Behaviour and Limitations
+
+### Sensitivity to Inputs
+
+- The model is designed to simulate **realistic population-level dynamics**, not extreme or edge-case scenarios.
+- Applying extreme values (e.g., 0% or 100% risk) can cause the model to **fail or behave unpredictably**, as it lacks built-in constraints for such cases.
+- In practice, users should avoid pushing parameters beyond plausible bounds and consider adding **catch mechanisms** if needed.
+
+### Population-Level Assumptions
+
+- The model assumes that any intervention (e.g., smoking cessation) is **dispersed across the entire population**.
+- This means that even if an intervention targets a small group, its effect is **diluted** when applied at scale.
+- This can be counterintuitive when modeling **high-impact, low-coverage interventions**, as the model does not natively support granular targeting.
+
+## Targeted Interventions
+
+### Workarounds and Approximations
+- Although the model is not arrayed by **Index of Multiple Deprivation (IMD)** or other fine-grained subgroups, users can simulate targeted interventions by:
+  - Estimating the **percentage of the population** affected.
+  - Applying the intervention proportionally (e.g., 0.002% for a small cohort).
+- This approach was used in the **Health Checks module**, where a targeted intervention was modeled by adjusting the affected population share.
+
+### Array Capabilities
+
+- The model supports arraying by **age** and **sex**, allowing for stratified interventions across these dimensions.
+- For other dimensions (e.g., IMD), users must manually calculate and apply proportional effects.
+
+## Conceptual Clarifications
+
+### Uniform Risk Reduction
+
+- When a risk factor is changed, the model assumes a **uniform reduction in risk** across all individuals.
+- This means that even if IMD stratification is applied later, the **relative distribution** of risk remains valid, as all groups have experienced the same proportional change.
+- This logic supports the use of post-adjustment stratification without invalidating the model’s internal consistency.
