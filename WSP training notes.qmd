@@ -126,51 +126,64 @@ Ghosting Ghosted elements are visual duplicates used to simplify layout. They re
 
 This session focused on understanding how **risk factors** are represented and manipulated within the Kent JSNA cohort model. The goal was to clarify how these inputs influence health outcomes and model flows, particularly in the context of **scenario testing** and **targeted interventions**.
 
+## The big picture
+
+Mark: This is an oversimplification but I think some modified version of it will be helpful to keep in tact:
+
+1.  The model simulates core population dynamics, including **births, ageing, and deaths**, across time steps.
+2.  At each time step, the model calculates disease incidence and mortality using fixed rates stratified by age, sex, and condition.
+3.  In the model, 'risk' is based on primary preventative factors such as smoking, total cholesterol, systolic blood pressure, body mass index, physical inactivity and alcohol consumption. It is important to remember that all the calculations in the cohort model are based on the whole population, not a small cohort.
+4.  Long-term trends in these risk factors can be set to reflect changes over time. This alters the size of subgroups within the population who exhibit these risks.
+5.  These subgroup populations can be further modified by interventions aimed at reducing the prevalence of the same risk factors.
+6.  Once the size of each risk group is determined, risk ratios are applied to adjust incidence rates (or disease transition rates) at the **population level**.
+7.  Need to add something on relative risk reduction calculations ...
+
 ## Risk Factors in the Interface
 
 ### Structure and Navigation
 
-- The **Risk Factors** section of the model interface includes two key components:
-  - **Trend data** sourced from the Health Survey for England, displayed as annual compounded changes.
-  - **Risk ratios** used directly in the model, stratified by **condition** and **gender**.
-- Users can switch between different risk factors using dropdown menus and view how each affects specific health conditions.
+-   The **Risk Factors** section of the model interface includes two key components:
+    -   **Trend data** sourced from the Health Survey for England, displayed as annual compounded changes.
+    -   **Risk ratios** used directly in the model, stratified by **condition** and **gender**.
+-   Users can switch between different risk factors using dropdown menus and view how each affects specific health conditions.
 
 ### Functional Role in the Model
 
-- Risk ratios are used to **adjust transition probabilities** between health states (e.g., from no condition to single condition).
-- These ratios are applied **uniformly across the population**, meaning any change affects all individuals equally, regardless of subgroup.
+-   Risk ratios are used to **adjust transition probabilities** between health states (e.g., from no condition to single condition).
+-   These ratios are applied **uniformly across the population**, meaning any change affects all individuals equally, regardless of subgroup.
 
 ## Model Behaviour and Limitations
 
 ### Sensitivity to Inputs
 
-- The model is designed to simulate **realistic population-level dynamics**, not extreme or edge-case scenarios.
-- Applying extreme values (e.g., 0% or 100% risk) can cause the model to **fail or behave unpredictably**, as it lacks built-in constraints for such cases.
-- In practice, users should avoid pushing parameters beyond plausible bounds and consider adding **catch mechanisms** if needed.
+-   The model is designed to simulate **realistic population-level dynamics**, not extreme or edge-case scenarios.
+-   Applying extreme values (e.g., 0% or 100% risk) can cause the model to **fail or behave unpredictably**, as it lacks built-in constraints for such cases.
+-   In practice, users should avoid pushing parameters beyond plausible bounds and consider adding **catch mechanisms** if needed.
 
 ### Population-Level Assumptions
 
-- The model assumes that any intervention (e.g., smoking cessation) is **dispersed across the entire population**.
-- This means that even if an intervention targets a small group, its effect is **diluted** when applied at scale.
-- This can be counterintuitive when modeling **high-impact, low-coverage interventions**, as the model does not natively support granular targeting.
+-   The model assumes that any intervention (e.g., smoking cessation) is **dispersed across the entire population**.
+-   This means that even if an intervention targets a small group, its effect is **diluted** when applied at scale.
+-   This can be counterintuitive when modeling **high-impact, low-coverage interventions**, as the model does not natively support granular targeting.
 
 ## Targeted Interventions
 
 ### Workarounds and Approximations
-- Although the model is not arrayed by **Index of Multiple Deprivation (IMD)** or other fine-grained subgroups, users can simulate targeted interventions by:
-  - Estimating the **percentage of the population** affected.
-  - Applying the intervention proportionally (e.g., 0.002% for a small cohort).
-- This approach was used in the **Health Checks module**, where a targeted intervention was modeled by adjusting the affected population share.
+
+-   Although the model is not arrayed by **Index of Multiple Deprivation (IMD)** or other fine-grained subgroups, users can simulate targeted interventions by:
+    -   Estimating the **percentage of the population** affected.
+    -   Applying the intervention proportionally (e.g., 0.002% for a small cohort).
+-   This approach was used in the **Health Checks module**, where a targeted intervention was modeled by adjusting the affected population share.
 
 ### Array Capabilities
 
-- The model supports arraying by **age** and **sex**, allowing for stratified interventions across these dimensions.
-- For other dimensions (e.g., IMD), users must manually calculate and apply proportional effects.
+-   The model supports arraying by **age** and **sex**, allowing for stratified interventions across these dimensions.
+-   For other dimensions (e.g., IMD), users must manually calculate and apply proportional effects.
 
 ## Conceptual Clarifications
 
 ### Uniform Risk Reduction
 
-- When a risk factor is changed, the model assumes a **uniform reduction in risk** across all individuals.
-- This means that even if IMD stratification is applied later, the **relative distribution** of risk remains valid, as all groups have experienced the same proportional change.
-- This logic supports the use of post-adjustment stratification without invalidating the model’s internal consistency.
+-   When a risk factor is changed, the model assumes a **uniform reduction in risk** across all individuals.
+-   This means that even if IMD stratification is applied later, the **relative distribution** of risk remains valid, as all groups have experienced the same proportional change.
+-   This logic supports the use of post-adjustment stratification without invalidating the model’s internal consistency.
