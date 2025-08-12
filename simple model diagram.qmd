@@ -1,0 +1,48 @@
+---
+title: "JSNA cohort model"
+format: html
+---
+
+For help and tutorials see the [Mermaid documentation for flowcharts](https://mermaid.js.org/syntax/flowchart.html) and Quarto [pages](https://quarto.org/docs/authoring/diagrams.html).
+
+
+
+```{mermaid}
+---
+title: Simple model overview
+---
+
+flowchart TD
+
+%% Core progression
+  B([Births]) --> N[(None)]
+  N ==> Fs(Flow to\nSingle) ==> S[(Single)]
+  S ==> Fm(Flow to\nMultiple) ==> M[(Multiple)]
+
+%% Deaths
+  N --> Dn([Deaths])
+  S --> Ds([Deaths])
+  M --> Dm([Deaths])
+
+%% Ageing chains
+  N <--> An(Ageing)
+  S <--> As(Ageing)
+  M <--> Am(Ageing)
+
+
+%% Set class defs
+classDef noborder stroke:none,fill:none;
+classDef deaths stroke:red,fill:#F0D4D4;
+classDef ageing stroke:blue,fill:#BBD4FC;
+classDef births stroke:green,fill:#DDF3CB;
+    class B births;
+    class Fs noborder;
+    class Fm noborder;
+    class Dn deaths;
+    class Ds deaths;
+    class Dm deaths;
+    class An ageing;
+    class As ageing;
+    class Am ageing;
+
+```
