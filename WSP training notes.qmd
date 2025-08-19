@@ -16,10 +16,6 @@ In collaboration with [Whole Systems Partnership](https://www.thewholesystem.co.
 
 # Session 1 - Initial model set-up – model run specs, arrays, initialisation data, initial model calibration.
 
-## Session Purpose
-
-Led by Aaron Bhavsar, this session introduced the structure, logic, and technical underpinnings of the Kent JSNA cohort model. The goal was to build foundational understanding for analysts working with Stella to simulate population health dynamics in Kent.
-
 ## Model Architecture and Flow
 
 ### Core Structure
@@ -52,12 +48,12 @@ Euler is the default method used. Alternatives like Cycle Time, RK2, and RK4 are
 
 ### Purpose and Benefits
 
-Arrays allow the model to handle multiple categories (e.g., conditions, age bands, LADs) without duplicating pathways: They enable stratification and scalability. Without arrays, the model would require separate stocks and flows for each category—impractical for complex systems.
+Arrays allow the model to handle multiple categories (e.g., conditions, age bands, LADs) without duplicating pathways: They enable stratification and scalability. Without arrays, the model would require separate stocks and flows for each category, which is impractical for complex systems.
 
 ### Key Arrays Used
 
 -   Conditions: asthma, CHD, COPD, diabetes, heart failure, stroke, SMI, dementia, neuro, LD.
--   Risk Factors: smoking, blood pressure, etc.
+-   Risk Factors: smoking, blood pressure, cholesterol, BMI, physical inactivity, diabetes, loneliness, alcohol consumption, serious mental illness and fuel poverty
 -   Demographics: gender, age bands, LADs, IMD quintiles.
 
 ### Array Editor
@@ -88,7 +84,7 @@ Exercise 2 - summing arrayed stocks. The purpose of this exercise was to highlig
 
 ### Exporting
 
-1.  Choose the table you would like to export. Click Mark for export and name the table. Set the orientation.
+1.  Choose the table you would like to export. Open the normal side panel for editing and click Mark for export and name the table. Set the orientation.
 
 2.  Create a blank Excel file locally (not on OneDrive/SharePoint).
 
@@ -108,11 +104,23 @@ Tips - Use “Make Template” to generate a full import sheet. Be cautious with
 
 ## Initialisation Data
 
-The key data sources used to initialise the model are as follows: - Population, deaths, migration from housing-led projections - IMD and condition prevalences (used for stratification and adjustments) - Ethnicity (used only in the health checks module to boost attendance in targeted areas).
+The key data sources used to initialise the model are as follows: 
+- Births 
+- Deaths 
+- Migration: Annual numbers from the Housing Led Projections.
+- IMD quintiles import
+  - IMD quintiles by LAD
+  - IMD quintiles by condition
+  - IMD Death ratio
+- CMD: Generic prevalence of Common mental health Disorders by Age, Gender, IMD
+- Covid: Evidence collected during COVID19 to calculate proportions at risk and mortality
+- Ethnicity: Ethnic make up by LAD – used for scenarios (e.g. Health Checks) only.
 
 ### How Data Feeds the Model
 
-Prevalence rates (non, single, multiple) are calculated and used to initialise stocks. These rates are arrayed by gender, condition, and age band. Graphical converters adjust values over time.
+Population data is fed into the 3 corresponding graphical converters. These initialise the population and provide the baseline for the calculated projections. 
+
+Prevalence of conditions are set in the converter `Cohort rate single`, and are used to initialise stocks. These rates are arrayed by gender and age band. 
 
 ## Navigation and Debugging
 
@@ -120,23 +128,43 @@ Finding Elements - Use Find → Arrayed by to locate where arrays are used. - Us
 
 Ghosting Ghosted elements are visual duplicates used to simplify layout. They retain full functionality and are linked to the original.
 
+
 # Session 2 - Calculation and use of risk factors including IMD
 
 ## Session Purpose
 
-This session focused on understanding how **risk factors** are represented and manipulated within the Kent JSNA cohort model. The goal was to clarify how these inputs influence health outcomes and model flows, particularly in the context of **scenario testing** and **targeted interventions**.
+This session focused on understanding how risk factors are represented and manipulated within the Kent JSNA cohort model. The goal was to clarify how these inputs influence health outcomes and model flows, particularly in the context of scenario testing and targeted interventions.
 
 ## The big picture
 
 Mark: This is an oversimplification but I think some modified version of it will be helpful to keep in tact:
 
-1.  The model simulates core population dynamics, including **births, ageing, and deaths**, across time steps.
-2.  At each time step, the model calculates disease incidence and mortality using fixed rates stratified by age, sex, and condition.
+1.  The model simulates core population dynamics, including **births, ageing, migration and deaths**, across time steps.
+2.  At each time step, the model calculates disease incidence and mortality using fixed rates stratified by age, gender, and condition.
 3.  In the model, 'risk' is based on primary preventative factors such as smoking, total cholesterol, systolic blood pressure, body mass index, physical inactivity and alcohol consumption. It is important to remember that all the calculations in the cohort model are based on the whole population, not a small cohort.
 4.  Long-term trends in these risk factors can be set to reflect changes over time. This alters the size of subgroups within the population who exhibit these risks.
 5.  These subgroup populations can be further modified by interventions aimed at reducing the prevalence of the same risk factors.
 6.  Once the size of each risk group is determined, risk ratios are applied to adjust incidence rates (or disease transition rates) at the **population level**.
 7.  Need to add something on relative risk reduction calculations ...
+
+Heather's interpretation:
+
+1.  The model simulates core population dynamics, including **births, ageing, migration and deaths**, across time steps.
+2.  At each time step, the model calculates disease incidence and mortality using fixed rates stratified by age, gender, and condition.
+3.  In the model, 'risk' is based on primary preventative factors such as smoking, total cholesterol, systolic blood pressure, body mass index, physical inactivity and alcohol consumption. It is important to remember that all the calculations in the cohort model are based on the whole population.
+4.  The relationship between every risk factor and condition is defined by the risk ratios. For example, the risk ratio for smoking x asthma is 1.5, indicating that smokers have 1.5x the risk of asthma as non-smokers. 
+5.  These ratios are then used to calculate the population attributable fraction - that is, the proportion of the cases of each condition in the population which are caused by that risk factor.
+6.  Long-term trends in these risk factors can be set to reflect changes over time and interventions aimed at reducing the prevalence of the same risk factors can be applied.
+7.  The PAF which would have been caused by the percentage reduction in the risk factor prevalence is subtracted from 1 to create the leftover prevalence of the condition, and that proportion acts on the incidence rate elsewhere in the model, alongside other factors.
+The PAF flow is further explained in the images below.
+
+![Cohort model PAF explanation](images/Use%20of%20PAF%20in%20the%20cohort%20model.jpg.png){fig-alt="Cohort model PAF explanation" fig-align="center"}
+
+![Cohort model PAF risk flow](images/Use%20of%20PAF%20in%20the%20cohort%20model%202.jpg.png){fig-alt="Cohort model PAF risk flow" fig-align="center"}
+
+## add explanation of the regression modelled risk factors
+
+
 
 ## Risk Factors in the Interface
 
