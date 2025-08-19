@@ -104,30 +104,19 @@ Tips - Use “Make Template” to generate a full import sheet. Be cautious with
 
 ## Initialisation Data
 
-The key data sources used to initialise the model are as follows: 
-- Births 
-- Deaths 
-- Migration: Annual numbers from the Housing Led Projections.
-- IMD quintiles import
-  - IMD quintiles by LAD
-  - IMD quintiles by condition
-  - IMD Death ratio
-- CMD: Generic prevalence of Common mental health Disorders by Age, Gender, IMD
-- Covid: Evidence collected during COVID19 to calculate proportions at risk and mortality
-- Ethnicity: Ethnic make up by LAD – used for scenarios (e.g. Health Checks) only.
+The key data sources used to initialise the model are as follows: - Births - Deaths - Migration: Annual numbers from the Housing Led Projections. - IMD quintiles import - IMD quintiles by LAD - IMD quintiles by condition - IMD Death ratio - CMD: Generic prevalence of Common mental health Disorders by Age, Gender, IMD - Covid: Evidence collected during COVID19 to calculate proportions at risk and mortality - Ethnicity: Ethnic make up by LAD – used for scenarios (e.g. Health Checks) only.
 
 ### How Data Feeds the Model
 
-Population data is fed into the 3 corresponding graphical converters. These initialise the population and provide the baseline for the calculated projections. 
+Population data is fed into the 3 corresponding graphical converters. These initialise the population and provide the baseline for the calculated projections.
 
-Prevalence of conditions are set in the converter `Cohort rate single`, and are used to initialise stocks. These rates are arrayed by gender and age band. 
+Prevalence of conditions are set in the converter `Cohort rate single`, and are used to initialise stocks. These rates are arrayed by gender and age band.
 
 ## Navigation and Debugging
 
 Finding Elements - Use Find → Arrayed by to locate where arrays are used. - Use Find → Variable Name to locate specific converters or stocks. - Use Causes/Uses to trace dependencies and relationships.
 
 Ghosting Ghosted elements are visual duplicates used to simplify layout. They retain full functionality and are linked to the original.
-
 
 # Session 2 - Calculation and use of risk factors including IMD
 
@@ -152,19 +141,16 @@ Heather's interpretation:
 1.  The model simulates core population dynamics, including **births, ageing, migration and deaths**, across time steps.
 2.  At each time step, the model calculates disease incidence and mortality using fixed rates stratified by age, gender, and condition.
 3.  In the model, 'risk' is based on primary preventative factors such as smoking, total cholesterol, systolic blood pressure, body mass index, physical inactivity and alcohol consumption. It is important to remember that all the calculations in the cohort model are based on the whole population.
-4.  The relationship between every risk factor and condition is defined by the risk ratios. For example, the risk ratio for smoking x asthma is 1.5, indicating that smokers have 1.5x the risk of asthma as non-smokers. 
+4.  The relationship between every risk factor and condition is defined by the risk ratios. For example, the risk ratio for smoking x asthma is 1.5, indicating that smokers have 1.5x the risk of asthma as non-smokers.
 5.  These ratios are then used to calculate the population attributable fraction - that is, the proportion of the cases of each condition in the population which are caused by that risk factor.
 6.  Long-term trends in these risk factors can be set to reflect changes over time and interventions aimed at reducing the prevalence of the same risk factors can be applied.
-7.  The PAF which would have been caused by the percentage reduction in the risk factor prevalence is subtracted from 1 to create the leftover prevalence of the condition, and that proportion acts on the incidence rate elsewhere in the model, alongside other factors.
-The PAF flow is further explained in the images below.
+7.  The PAF which would have been caused by the percentage reduction in the risk factor prevalence is subtracted from 1 to create the leftover prevalence of the condition, and that proportion acts on the incidence rate elsewhere in the model, alongside other factors. The PAF flow is further explained in the images below.
 
-![Cohort model PAF explanation](images/Use%20of%20PAF%20in%20the%20cohort%20model.jpg.png){fig-alt="Cohort model PAF explanation" fig-align="center"}
+![Cohort model PAF explanation](images/Use%20of%20PAF%20in%20the%20cohort%20model.jpg){fig-alt="Cohort model PAF explanation" fig-align="center"}
 
-![Cohort model PAF risk flow](images/Use%20of%20PAF%20in%20the%20cohort%20model%202.jpg.png){fig-alt="Cohort model PAF risk flow" fig-align="center"}
+![Cohort model PAF risk flow](images/Use%20of%20PAF%20in%20the%20cohort%20model%202.jpg){fig-alt="Cohort model PAF risk flow" fig-align="center"}
 
 ## add explanation of the regression modelled risk factors
-
-
 
 ## Risk Factors in the Interface
 
@@ -216,99 +202,98 @@ The PAF flow is further explained in the images below.
 -   This means that even if IMD stratification is applied later, the **relative distribution** of risk remains valid, as all groups have experienced the same proportional change.
 -   This logic supports the use of post-adjustment stratification without invalidating the model’s internal consistency.
 
-# Session 3 - Ageing chain and mortality rates 
+# Session 3 - Ageing chain and mortality rates
 
 ## Session Purpose
 
 This session explored the use of **ageing chains** and **mortality rates** in the Kent JSNA cohort model, with additional context on how **COVID-19 impacts** were integrated into the model architecture. The aim was to deepen understanding of how age progression and disease-related mortality are represented, and how external events like COVID can influence long-term health risks.
 
-
 ## Ageing Chains and Cohort Progression
 
 ### Age Band Structure
 
-- The model uses an **ageing chain** to simulate individuals moving through age bands over time.
-- Age bands are defined using the age array which runs through the whole model.
-- The 'cohort lengths' converter specifies the length of each age band (e.g. 2 years for ages 0–2, 10 years for ages 30–39).
-- This allows for variable cohort durations, which reflect real-world demographic or policy structures (e.g., educational stages).
+-   The model uses an **ageing chain** to simulate individuals moving through age bands over time.
+-   Age bands are defined using the age array which runs through the whole model.
+-   The 'cohort lengths' converter specifies the length of each age band (e.g. 2 years for ages 0–2, 10 years for ages 30–39).
+-   This allows for variable cohort durations, which reflect real-world demographic or policy structures (e.g., educational stages).
 
 ### Transition Logic
 
-- Individuals age up based on the formula:  
-  **Outflow = Stock / Cohort Length**
-- For example:
-  - In a 2-year cohort (e.g., ages 0–2), 50% of the population ages up each year.
-  - In a 10-year cohort (e.g., ages 30–39), 10% ages up annually.
-- This approach models average transitions, not individual-level distributions.
-- This doesn't apply to the final age band, 85+, which has a different formula.
+-   Individuals age up based on the formula:\
+    **Outflow = Stock / Cohort Length**
+-   For example:
+    -   In a 2-year cohort (e.g., ages 0–2), 50% of the population ages up each year.
+    -   In a 10-year cohort (e.g., ages 30–39), 10% ages up annually.
+-   This approach models average transitions, not individual-level distributions.
+-   This doesn't apply to the final age band, 85+, which has a different formula.
 
 ### Formula Behaviour
-- The inflow to the next age band subtracts 1 from the array index to align with the correct age progression.
-- This subtraction is necessary due to how arrays are indexed and how age transitions are calculated in Stella.
-- The model runs with a Delta Time (DT) of 1 year, meaning transitions are calculated annually.
+
+-   The inflow to the next age band subtracts 1 from the array index to align with the correct age progression.
+-   This subtraction is necessary due to how arrays are indexed and how age transitions are calculated in Stella.
+-   The model runs with a Delta Time (DT) of 1 year, meaning transitions are calculated annually.
 
 ### Upper Age Band Logic
 
-- A common question is whether everyone dies at age 95.
-- In the current model, individuals age out of the final age band after a specified average duration.
-- This does not mean all individuals die at the same age; rather, the model applies a decay function based on average survival of 10 years from age 85.
-- This is typical of aggregate system dynamics models, where:
-  - Individual variation is not explicitly modeled.
-  - Population-level averages drive transitions and outflows.
+-   A common question is whether everyone dies at age 95.
+-   In the current model, individuals age out of the final age band after a specified average duration.
+-   This does not mean all individuals die at the same age; rather, the model applies a decay function based on average survival of 10 years from age 85.
+-   This is typical of aggregate system dynamics models, where:
+    -   Individual variation is not explicitly modeled.
+    -   Population-level averages drive transitions and outflows.
 
 ### Conceptual Clarification
 
-- Unlike agent-based models, which apply distributions to individuals, this model uses average-based flows.
-- The final age band behaves like any other stock:
-  - Individuals enter, remain for an average duration, and then exit (representing death).
-- The model does not require a hard-coded mortality age; instead, it uses flow rates to simulate ageing out.
+-   Unlike agent-based models, which apply distributions to individuals, this model uses average-based flows.
+-   The final age band behaves like any other stock:
+    -   Individuals enter, remain for an average duration, and then exit (representing death).
+-   The model does not require a hard-coded mortality age; instead, it uses flow rates to simulate ageing out.
 
 ## Demonstration Model
 
 ### Example Setup
 
-- A simplified model was built using:
-  - A **stock** called `People`, initialised with 5 individuals aged 0.
-  - An **array** of 25 numbered age bands (`0–24`).
-  - All other age bands were initialised to 0.
-- **Inflow** and **outflow** connectors were added:
-  - **Outflow** formula: `Stock / Cohort length`
-  - **Inflow** formula: `Outflow from previous band (index - 1)`
-- The model was run with a **DT of 1 year**, showing individuals ageing up annually until they exit the final band.
-
+-   A simplified model was built using:
+    -   A **stock** called `People`, initialised with 5 individuals aged 0.
+    -   An **array** of 25 numbered age bands (`0–24`).
+    -   All other age bands were initialised to 0.
+-   **Inflow** and **outflow** connectors were added:
+    -   **Outflow** formula: `Stock / Cohort length`
+    -   **Inflow** formula: `Outflow from previous band (index - 1)`
+-   The model was run with a **DT of 1 year**, showing individuals ageing up annually until they exit the final band.
 
 ## Mortality and COVID-19 Impacts
 
 ### COVID-Specific Model Adjustments
 
-- During the pandemic, a **dual structure** was used, which is reflected in the second copy of the main spine of the model:
-  - Individuals infected with COVID either exited the model via **mortality flows** or transitioned to a **post-COVID stock**.
-  - Recovered individuals were assigned **elevated risk ratios** for the following conditions: coronary heart disease, heart failure, stroke, diabetes.
-- COVID was treated as a **risk factor**, increasing long-term health risks even in the absence of other conditions.
+-   During the pandemic, a **dual structure** was used, which is reflected in the second copy of the main spine of the model:
+    -   Individuals infected with COVID either exited the model via **mortality flows** or transitioned to a **post-COVID stock**.
+    -   Recovered individuals were assigned **elevated risk ratios** for the following conditions: coronary heart disease, heart failure, stroke, diabetes.
+-   COVID was treated as a **risk factor**, increasing long-term health risks even in the absence of other conditions.
 
 ### Evidence-Based Risk Adjustments
 
-- Published research supports increased risk of cardiovascular disease post-COVID.
-- The model incorporated this by adjusting the **risk ratio converters** for recovered individuals, which is approximately 50% of the population.
+-   Published research supports increased risk of cardiovascular disease post-COVID.
+-   The model incorporated this by adjusting the **risk ratio converters** for recovered individuals, which is approximately 50% of the population.
 
 ### Behavioural and Systemic Effects
 
-- COVID led to worsening health behaviours, which were captured in the model using by increasing the prevalence of the following risk factors: smoking, alcohol consumption, physical activity and obesity. 
-- These behavioural changes were modeled as **time-varying inputs**, whereby the increase is only temporary and tails off over time.
+-   COVID led to worsening health behaviours, which were captured in the model using by increasing the prevalence of the following risk factors: smoking, alcohol consumption, physical activity and obesity.
+-   These behavioural changes were modeled as **time-varying inputs**, whereby the increase is only temporary and tails off over time.
 
 ### Prevention and Backlog Effects
 
-- Reduced access to primary and secondary prevention services (e.g., health checks) during COVID was modeled as a temporary reduction in preventive flow rates.
-- This created a backlog effect, increasing future risk levels due to missed early interventions.
-- The model includes delayed flow components to simulate this backlog and its impact on population health.
+-   Reduced access to primary and secondary prevention services (e.g., health checks) during COVID was modeled as a temporary reduction in preventive flow rates.
+-   This created a backlog effect, increasing future risk levels due to missed early interventions.
+-   The model includes delayed flow components to simulate this backlog and its impact on population health.
 
 ## Long-Term Considerations
 
-- The model captures both **direct impacts** (e.g., increased mortality) and **indirect impacts** (e.g., elevated risk ratios, behavioural changes).
-- There is ongoing uncertainty about whether the population has returned to a new normal or whether residual effects continue to influence health outcomes.
-- Components such as Post-COVID Risk Adjustment and Long COVID Prevalence may require review and updating based on new evidence.
+-   The model captures both **direct impacts** (e.g., increased mortality) and **indirect impacts** (e.g., elevated risk ratios, behavioural changes).
+-   There is ongoing uncertainty about whether the population has returned to a new normal or whether residual effects continue to influence health outcomes.
+-   Components such as Post-COVID Risk Adjustment and Long COVID Prevalence may require review and updating based on new evidence.
 
 ## Next Steps
 
-- Future sessions may revisit the COVID module and explore how to update assumptions based on more recent data.
-- Continued review of post-COVID health trends will help refine risk factor modeling
+-   Future sessions may revisit the COVID module and explore how to update assumptions based on more recent data.
+-   Continued review of post-COVID health trends will help refine risk factor modeling
