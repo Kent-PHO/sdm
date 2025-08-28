@@ -297,3 +297,61 @@ This session explored the use of **ageing chains** and **mortality rates** in th
 
 -   Future sessions may revisit the COVID module and explore how to update assumptions based on more recent data.
 -   Continued review of post-COVID health trends will help refine risk factor modeling
+
+# Session 4 - Interventions on healthy behaviour change: generating what-if scenarios
+
+## Overview
+
+Two main types of interventions:
+
+1.  Trends
+
+2.  What if scenarios. More on these in future sessions.
+
+## Modifying trends in risk factors
+
+There are two main methods:
+
+1.  Risk factor input page on model interface (easiest quick option)
+
+2.  Export values from converter 'Risk reduction annual' to Excel, edit then re-import. This takes a bit longer but has some distinct advantages: - allows for bulk changes - keeps a record of changes made for reproducibility - can be done programmatically in theory using R.
+
+### Detailed step by step instructions for exporting data from the model to Excel
+
+1.  Create a blank table in model design screen
+2.  Drag and drop Risk reduction annual converter into the table
+3.  Change orientation to horizontal
+4.  Tick the box 'Mark for Export'
+5.  Assign a name to the table
+6.  Necessary to run the model once to generate the export file
+7.  From menu bar, select Model --\> Export Data ...
+8.  In Model Exports screen under 'Destination', select an existing Excel file
+9.  Select an existing worksheet
+10. In Model Exports screen under 'Data source', select the table you created
+11. Set link type to 'On demand'
+12. When ready to export, click on the 'Export' icon from the table above. Just clicking OK does not run the export. It only saves the settings from the export process.
+13. Open the Excel file and edit the values as needed. The same values are repeated for each year of the model run so only the first column needs to be retained.
+
+To re-import the edited values back into the model:
+
+1.  Save the edited values in a new Excel file or a new worksheet within the same file
+
+2.  From menu bar, select Model --\> Import Data ...
+
+3.  In Model Imports screen under 'Source', select the Excel file
+
+4.  Select the worksheet containing the edited values
+
+5.  Set link type to 'On demand'
+
+6.  Set import behaviour to 'Set parameters'
+
+7.  Click ok to save the import settings
+
+8.  When ready to import, open the same dialog box again and click on the 'Import' icon from the table above.
+
+::: callout-note
+## Trend values are static
+
+Note that risk factor trend values are static and applied consistently across all 25 years of the model run.
+:::
