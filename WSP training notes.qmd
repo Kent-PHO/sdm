@@ -314,7 +314,7 @@ There are two main methods:
 
 1.  Risk factor input page on model interface (easiest quick option)
 
-2.  Export values from converter 'Risk reduction annual' to Excel, edit then re-import. This takes a bit longer but has some distinct advantages: - allows for bulk changes - keeps a record of changes made for reproducibility - can be done programmatically in theory using R.
+2.  Export values from converter 'Risk reduction annual' to Excel, edit then re-import. This takes a bit longer but has some distinct advantages: a) allows for bulk changes, b) keeps a record of changes made for reproducibility, and c) can be done programmatically (in theory) using R.
 
 ### Detailed step by step instructions for exporting data from the model to Excel
 
@@ -325,7 +325,7 @@ There are two main methods:
 5.  Assign a name to the table
 6.  Necessary to run the model once to generate the export file
 7.  From menu bar, select Model --\> Export Data ...
-8.  In Model Exports screen under 'Destination', select an existing Excel file
+8.  In Model Exports screen under 'Destination', select an existing Excel file created in advance for this purpose.
 9.  Select an existing worksheet
 10. In Model Exports screen under 'Data source', select the table you created
 11. Set link type to 'On demand'
@@ -353,5 +353,5 @@ To re-import the edited values back into the model:
 ::: callout-note
 ## Trend values are static
 
-Note that risk factor trend values are static and applied consistently across all 25 years of the model run.
+Note that risk factor trend values are static and applied consistently across all 25 years of the model run. This requires further consideration because it is unlikely to happen within the population. The rate of change should probably reduce over time.
 :::
