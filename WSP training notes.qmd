@@ -302,7 +302,7 @@ This session explored the use of **ageing chains** and **mortality rates** in th
 
 ## Overview
 
-Two main types of interventions:
+The session covered the two main types of interventions and how to implement them in the model:
 
 1.  Trends
 
@@ -355,3 +355,110 @@ To re-import the edited values back into the model:
 
 Note that risk factor trend values are static and applied consistently across all 25 years of the model run. This requires further consideration because it is unlikely to happen within the population. The rate of change should probably reduce over time.
 :::
+
+## Implementation in the model
+
+The rest of the session explored how risk reduction is implemented in the model, particularly focusing on smoking, blood pressure, cholesterol, and other risk factors. The discussion covered cumulative logic, interface switches, population-level assumptions, mortality modelling, forecasting horizons, and the scope of prevention modelling.
+
+## Key Concepts & Model Mechanics
+
+### Interface Switch & Stock Logic
+
+-   A toggle on the interface activates the risk reduction logic.
+-   When turned on, values are pulled from inputs and added to a stock annually.
+-   This cumulative approach means the effect grows over time rather than remaining static.
+
+### Three Scenario Approaches
+
+-   Static Value: A fixed annual reduction (e.g., 0.006) applied each year.
+-   Cumulative Stock: The same value added to a stock, resulting in growth year-on-year.
+-   Time Series Input: A graphical input that varies over time, allowing dynamic reductions.
+
+### Model Behavior
+
+-   The model does not track subgroups (e.g., smokers vs. non-smokers).
+-   It applies reductions universally, assuming a percentage reduction in risk, not prevalence.
+-   This can lead to misleading results if not carefully calibrated (e.g., reducing smoking by 50% when only 11% smoke).
+
+## Clarifications & Misunderstandings
+
+-   Risk vs. Prevalence: The model reduces risk, not the number of people with the risk factor.
+-   No Negative Values: The model doesn’t allow risk to go below zero, but it doesn’t inherently know the starting prevalence.
+-   Cumulative Risk Reduction: Over long periods, cumulative reductions can exceed realistic bounds if not sense-checked.
+-   Smooth Function: Used to avoid jagged stepwise increases in cumulative reductions, creating a more realistic curve.
+
+## Additional Modules & Flexibility
+
+-   Alternative Scenarios: There is an additional reduction page in the interface for blood pressure, cholesterol and smoking.
+-   Blanket Reductions: Apply uniform reductions across the population without gender or age specificity.
+-   Interface Switches: Each risk factor (e.g., smoking, blood pressure) can have its own switch and converter.
+
+### Risk Factor Application
+
+-   Smoking: Reduction values (e.g., 0.5%) are applied annually across the population.
+-   Blood Pressure & Cholesterol: Applied as unit changes (e.g., mmHg) across the population.
+-   Population-Level Impact: These changes affect incidence rates for conditions based on age and gender arrays.
+-   Interdependencies: The model does not automatically link changes in one risk factor to others, which may lead to under- or over-estimation of effects.
+
+## General group discussion about the model
+
+### Diagram Walkthrough (Heather)
+
+-   The model spine includes birth, migration, death, single condition, and multiple condition flows.
+-   Risk factors modify the rate of flow between these states.
+-   All risk adjustments are multipliers on the incidence rate.
+
+### Worked Example: Smoking & Asthma
+
+-   30% of population smokes; risk ratio for asthma is 1.5.
+-   PAF formula calculates 13% of asthma cases attributable to smoking.
+-   A 5% reduction in smoking leads to 2.4% fewer asthma cases.
+-   Final incidence rate is multiplied by 0.976 to reflect this change.
+
+### Mortality Modelling 
+
+-   Mortality Rates: Applied to each stock based on LAD, gender, and age band.
+-   Condition-Specific Mortality: Not explicitly modelled unless manually adjusted.
+-   Cause of Death Categories: Cancer, CVD, respiratory, and other.
+-   Prevalence Calculation: Based on live population in single + multiple condition stocks.
+-   Potential Calibration: Adjustments could reflect higher mortality for severe conditions.
+
+### Forecasting Horizon & Uncertainty
+
+-   Current Horizon: 25 years — early years are more reliable.
+-   Sensitivity Testing: Apply variation to flows and run multiple simulations.
+-   Scenario Testing vs. Forecasting: Best used for comparing interventions, not predicting exact future outcomes.
+-   Caveats: Important to communicate uncertainty and avoid overinterpreting long-term projections.
+
+### Risk Factors Included
+
+-   Current smoking
+-   Ex-smoking
+-   Blood pressure
+-   Cholesterol
+-   BMI
+-   Physical inactivity
+-   Diabetes
+-   Fuel poverty
+-   Severe mental illness (SMI)
+-   Adverse childhood experiences (ACE)
+-   Severe multiple disadvantage (SMD)
+-   Loneliness
+-   Alcohol
+
+### Reflections & Emotional Insights
+
+-   Frustration at complexity and cumulative logic.
+-   Desire for simplified explanations and visual aids.
+-   Concerns about double-counting effects.
+-   Suggestion for safety checks or visual summaries.
+-   Feedback welcomed to improve future training.
+
+## Key Takeaways
+
+-   Two main ways to apply additional scenarios:
+    1.  Import new trends by gender, age, and risk.
+    2.  Apply blanket reductions across the population.
+-   The model is flexible but requires careful interpretation.
+-   Visual walkthroughs and worked examples are helpful.
+-   Best used for scenario testing (and comparison), not long-term forecasting of precise numbers.
