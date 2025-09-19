@@ -462,3 +462,98 @@ The rest of the session explored how risk reduction is implemented in the model,
 -   The model is flexible but requires careful interpretation.
 -   Visual walkthroughs and worked examples are helpful.
 -   Best used for scenario testing (and comparison), not long-term forecasting of precise numbers.
+
+# Session 5 - NHS Health Checks module
+
+## Overview
+
+- The aim of the NHS Health Checks module is to explore the effect that the NHS Health Check programme has on the flow of people from the healthy (none) stock into the single and subsequently multiple condition stocks.
+- Interventions resulting from NHS Health Checks considered in the model are: smoking advice, blood pressure therapy, statins for cholesterol, and BMI/weight advice.
+- Evidence from existing literature was used to determine the impact of interventions on reducing risk factors for the health conditions considered in the model.
+- Interventions delay progression from healthy to single condition, which in turn slows progression to multiple conditions. Deaths can occur from any state. 
+- Only the 'none' stock (ages 40-74) is entered into the NHS Health Check pathway within the model. The 'single' and 'multiple' condition stocks do not enter the NHS Health Checks pathway. In the real world, some people with single and multiple conditions will be eligible for an NHS Health Check.
+- The model diagram omits births and migration for simplicity but these dynamics are present in the background of the simulation.
+
+- Aaron mentioned that people could potentially flow back from single to none but I don't think this is correct. He was perhaps talking about real world.
+
+## Scenarios
+
+### Original Scenarios
+![NHS Health Check Scenarios](images/jsna-cohort-model-nhs-hc-scenarios.png){fig-alt="Table showing the four NHS Health Check scenarios" fig-align="center"}
+
+- Scenarios B and C were 'discounted' (assumes this means they were deembed not feasible for real-world implementation) but the logic for them still exists in the model
+
+### Scenarios for NHS Health Check Paper
+
+| **Scenario** | **HC Programme**                | **Attendancce**                                                                           | **Intervention Received**                                          |
+|--------------|---------------------------------|-------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 1            | Run between yr 5 to 9 then stop | n/a                                                                                       | n/a                                                                |
+| 2            | Run between yr 5 to yr 25       | No change                                                                                 | No change                                                          |
+| 2            | Run between yr 5 to 9 then stop | No change                                                                                 | No change                                                          |
+| 4            | Run between yr 5 to 9 then stop | Increase uptake for the most deprived quintile to match the average for the whole of Kent | No change                                                          |
+| 5            | Run between yr 5 to yr 25       | Increase uptake for the most deprived quintile to match the average for the whole of Kent | No change                                                          |
+| 6            | Run between yr 5 to 9 then stop | No change                                                                                 | Increase intervention received by 50% (BP 50% and cholesterol 22%) |
+| 7            | Run between yr 5 to yr 25       | No change                                                                                 | Increase intervention received by 50% (BP 50% and cholesterol 22%) |
+| 8            | Run between yr 5 to 9 then stop | Increase uptake for the most deprived quintile to match the average for the whole of Kent | Increase intervention received by 50% (BP 50% and cholesterol 22%) |
+| 9            | Run between yr 5 to yr 25       | Increase uptake for the most deprived quintile to match the average for the whole of Kent | Increase intervention received by 50% (BP 50% and cholesterol 22%) |
+| 10           | Run between yr 5 to 9 then stop | Increase uptake for Thanet only to match the average for the whole of Kent                | No change                                                          |
+
+: Scenarios for NHS Health Check Paper {.striped. hover}
+
+- The model allows for scenario-specific boosting of attendance and intervention rates by IMD quintile, ethnicity, and LAD. Historical attendance data by LAD, gender, and age band is used to set baselines, and scenario switches on the interface enable users to adjust these parameters for targeted analysis.
+
+### Data Inputs for Scenarios
+
+- Historical attendance rates by LAD, gender, and age.
+- IMD composition of each LAD.
+- Ethnicity ratios for IMD 1 (most deprived).
+- Risk factor prevalence by IMD, gender, LAD and age.
+- Intervention rates for each risk group (e.g., percent of smokers receiving advice).
+- Effectiveness of interventions - some sources were unclear or based on best estimates.
+
+## Module Structure
+
+- A converter identifies the eligible age range (40–74).
+- The healthy population ('None' stock) is filtered by age to determine the eligible pool.
+- The total eligible population is calculated and then split into two stocks: 'eligible but did not attend' and 'eligibile and did attend'. Attendance is calculated according to historic attendance rates arrayed by age and gender.
+- The total elgible and attending is split by ethnicity in a separate stock and flow.
+- Attendance is further split by IMD using LAD-level IMD composition.
+- The IMD adjustment is not a true percentage but an adjustment factor, sometimes exceeding 100, based on best available estimates from NHS Health Check programme data.
+
+### IMD and Ethnicity Adjustments for Scenarios
+
+- There is a converter for adjusting the percentage attending from different IMD quintiles
+- There is a converter for adjusting the percentage attending from different ethnci groups
+- Controlling these adjustments can be done through switches on the interface
+
+### Risk Factor Integration
+
+- The total attending arrayed by LAD, IMD, age and gender including any additional from particular IMD quintiles plus additional from particular ethnic groups is multiplied by the prevalence of each risk factor (using the same arrays) to calculate the **number of attendees with each risk factor**.
+-For each risk group, the model applies the percentage receiving the intervention (e.g., 80% of smokers receive advice).
+- The effectiveness of each intervention is then applied, some values (e.g., 0.085 for smoking, 15 for BP) are not well-documented and may represent different concepts (e.g., success rate vs. risk reduction). 
+- The model multiplies the number of attendees with a risk factor by the intervention rate and effectiveness to estimate the number of successful interventions.
+- **Risk ratios for NHS Health Checks are not the same as risk ratios used in the core model**
+- **Risk reduction for all risk factors is calculated using PAF.** This is due to the values used for effectiveness of interventions in the 'NHS Health checks
+impacts risk factors' converter.
+- 'NHS Health checks effectiveness' converter has a value of 0.5 for blood pressure and cholesterol because there is evidence to suggest that people do not adhere to their medication regime.
+
+### Intergration With Core Stocks and Flows
+
+- The reduction in each risk factor as a result of NHS Health Checks is multiplied together to calculate a total risk reduction that can be applied to the flow from 'None' to 'Single' in the core model stock and flow.
+
+## Running Scenarios and Model Interface
+
+- Two main switches on the interface: one is the main NHS Health Checks switch, one is for original scenarios B and C. The switches should be used independently.
+- For modelling different scenarios, turn on the main switch 'Switch NHS Health checks' and then adjust the values in the boxes on the interface. Keep the second switch turned off.
+- If the main switch is turned on, other switches in the model (e.g. additional risk reduction in the local authority impacts section) should not be turned on.
+- A value of between 0 and 100 should be put into the boxes for increasing percent uptake from particular IMD quintiles.
+- The module’s time logic is hardcoded so that it simulates the NHS Health Checks programme running for 5 years and then ceasing. Manual changes would be needed throughout the module to run scenarios for different durations (e.g., 5 vs. 25 years).
+- Values in 'Baseline treatment received' are the baseline percentages of attendees with the relevant risk factor that receive an intervention e.g. 80% of smokers receive smoking advice
+
+## Limitations, Issues, and Model Maintenance (Aaron, Mark, Heather)
+
+- The model’s structure does not fully align with real-world eligibility criteria for health checks, particularly regarding which conditions exclude individuals from being eligible.
+- The aggregation of IMD and ethnicity after calculations for risk reduction so that it can be incorporated into the mainmodel flow means the model cannot answer questions about health inequalities or subgroup impacts, which was a concern for commissioners and public health specialists.
+- Some parameters and calculations are not well-documented, and there are inconsistencies in how risk and intervention effectiveness are handled across model sections.
+- The model’s time logic (hardcoded years for health cheque cycles) is cumbersome and should be refactored for easier scenario analysis.
+- There are unused or legacy sections in the model that could be cleaned up.
