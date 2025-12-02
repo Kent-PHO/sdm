@@ -496,20 +496,9 @@ The rest of the session explored how risk reduction is implemented in the model,
 
 ### Scenarios for NHS Health Check Paper
 
-| **Scenario** | **HC Programme** | **Attendancce** | **Intervention Received** |
-|----------------|----------------|------------------------|-----------------|
-| 1 | Run between yr 5 to 9 then stop | n/a | n/a |
-| 2 | Run between yr 5 to yr 25 | No change | No change |
-| 2 | Run between yr 5 to 9 then stop | No change | No change |
-| 4 | Run between yr 5 to 9 then stop | Increase uptake for the most deprived quintile to match the average for the whole of Kent | No change |
-| 5 | Run between yr 5 to yr 25 | Increase uptake for the most deprived quintile to match the average for the whole of Kent | No change |
-| 6 | Run between yr 5 to 9 then stop | No change | Increase intervention received by 50% (BP 50% and cholesterol 22%) |
-| 7 | Run between yr 5 to yr 25 | No change | Increase intervention received by 50% (BP 50% and cholesterol 22%) |
-| 8 | Run between yr 5 to 9 then stop | Increase uptake for the most deprived quintile to match the average for the whole of Kent | Increase intervention received by 50% (BP 50% and cholesterol 22%) |
-| 9 | Run between yr 5 to yr 25 | Increase uptake for the most deprived quintile to match the average for the whole of Kent | Increase intervention received by 50% (BP 50% and cholesterol 22%) |
-| 10 | Run between yr 5 to 9 then stop | Increase uptake for Thanet only to match the average for the whole of Kent | No change |
+\<\<\<\<\<\<\< HEAD \| **Scenario** \| **HC Programme** \| **Attendancce** \| **Intervention Received** \| \|----------------\|----------------\|------------------------\|-----------------\| \| 1 \| Run between yr 5 to 9 then stop \| n/a \| n/a \| \| 2 \| Run between yr 5 to yr 25 \| No change \| No change \| \| 2 \| Run between yr 5 to 9 then stop \| No change \| No change \| \| 4 \| Run between yr 5 to 9 then stop \| Increase uptake for the most deprived quintile to match the average for the whole of Kent \| No change \| \| 5 \| Run between yr 5 to yr 25 \| Increase uptake for the most deprived quintile to match the average for the whole of Kent \| No change \| \| 6 \| Run between yr 5 to 9 then stop \| No change \| Increase intervention received by 50% (BP 50% and cholesterol 22%) \| \| 7 \| Run between yr 5 to yr 25 \| No change \| Increase intervention received by 50% (BP 50% and cholesterol 22%) \| \| 8 \| Run between yr 5 to 9 then stop \| Increase uptake for the most deprived quintile to match the average for the whole of Kent \| Increase intervention received by 50% (BP 50% and cholesterol 22%) \| \| 9 \| Run between yr 5 to yr 25 \| Increase uptake for the most deprived quintile to match the average for the whole of Kent \| Increase intervention received by 50% (BP 50% and cholesterol 22%) \| \| 10 \| Run between yr 5 to 9 then stop \| Increase uptake for Thanet only to match the average for the whole of Kent \| No change \| ======= \| **Scenario** \| **HC Programme** \| **Attendancce** \| **Intervention Received** \| \|------------------\|------------------\|-------------------\|------------------\| \| 1 \| Run between yr 5 to 9 then stop \| n/a \| n/a \| \| 2 \| Run between yr 5 to yr 25 \| No change \| No change \| \| 2 \| Run between yr 5 to 9 then stop \| No change \| No change \| \| 4 \| Run between yr 5 to 9 then stop \| Increase uptake for the most deprived quintile to match the average for the whole of Kent \| No change \| \| 5 \| Run between yr 5 to yr 25 \| Increase uptake for the most deprived quintile to match the average for the whole of Kent \| No change \| \| 6 \| Run between yr 5 to 9 then stop \| No change \| Increase intervention received by 50% (BP 50% and cholesterol 22%) \| \| 7 \| Run between yr 5 to yr 25 \| No change \| Increase intervention received by 50% (BP 50% and cholesterol 22%) \| \| 8 \| Run between yr 5 to 9 then stop \| Increase uptake for the most deprived quintile to match the average for the whole of Kent \| Increase intervention received by 50% (BP 50% and cholesterol 22%) \| \| 9 \| Run between yr 5 to yr 25 \| Increase uptake for the most deprived quintile to match the average for the whole of Kent \| Increase intervention received by 50% (BP 50% and cholesterol 22%) \| \| 10 \| Run between yr 5 to 9 then stop \| Increase uptake for Thanet only to match the average for the whole of Kent \| No change \| \>\>\>\>\>\>\> 65b216d (Add Session 6 notes)
 
-: Scenarios for NHS Health Check Paper {.striped. hover}
+:   Scenarios for NHS Health Check Paper {.striped. hover}
 
 -   The model allows for scenario-specific boosting of attendance and intervention rates by IMD quintile, ethnicity, and LAD. Historical attendance data by LAD, gender, and age band is used to set baselines, and scenario switches on the interface enable users to adjust these parameters for targeted analysis.
 
@@ -567,7 +556,7 @@ The rest of the session explored how risk reduction is implemented in the model,
 -   The model’s time logic (hardcoded years for health cheque cycles) is cumbersome and should be refactored for easier scenario analysis.
 -   There are unused or legacy sections in the model that could be cleaned up.
 
-# Session 7
+\<\<\<\<\<\<\< HEAD \# Session 7
 
 ## Common Mental Disorders (CMD) module
 
@@ -626,4 +615,132 @@ The model's approach allows for scenario analysis and tracking of inequalities (
 
 ## Final Thoughts
 
-Model Reading & Modification: Aaron and Peter recommend starting with looking at stocks, then flows, then converters when analyzing or modifying a new model. Understanding the interface and outputs helps clarify model intent. Good modeling practice includes using converters for key variables to ensure transparency and ease of modification, though this can make diagrams visually complex.
+# Model Reading & Modification: Aaron and Peter recommend starting with looking at stocks, then flows, then converters when analyzing or modifying a new model. Understanding the interface and outputs helps clarify model intent. Good modeling practice includes using converters for key variables to ensure transparency and ease of modification, though this can make diagrams visually complex.
+
+# Session 6 - Smoking, ACE, and Hypertension modules
+
+## Overview
+
+-   This session covered a technical walkthrough of the Smoking module, with additional coverage of the ACE (Adverse Childhood Experiences) and Hypertension sub-models.
+
+-   Model logic, data sources, scenario parameters were covered, as well as practical implications for public health modeling.
+
+## Smoking Module
+
+The smoking module uses smoking prevalence data, arrayed by Local Authority District (LAD), gender, and age-band. It is built around a single stock, representing the number of smokers in the population, with inflows (new smokers) and outflows (quitters). The prevalence of smoking is calculated as the ratio of smokers to total population, with outputs arrayed by LAD, gender, and age-band.
+
+### Scenario Parameters
+
+There are three main scenario levers;
+
+-   **Alan Carr Approach:** A peer group cessation intervention, adjustable for percentage of smokers accessing (set by default to 10%), start year, and success rate (set by default to 33%).
+
+-   **Current Smoking Cessation Service:** runs on an ongoing basis - no switch - and is adjustable for access rate (set by default to 3%) and success rate (set by default to 50% over 4 weeks).
+
+-   **Trend Reduction in New Smokers:** Legislative or societal trend, modeled as an S-shaped reduction over 12 years, with adjustable start year and percentage reduction.
+
+### Model Logic and Outputs
+
+The module calculates the change in smoking prevalence under the three different scenarios mentioned above, feeding this into the main risk profile converter for downstream health impacts. All three can be run individually or in combination, and their cumulative effect on smoking prevalence is modeled. These scenarios and their key parameters can be adjusted in the model interface.
+
+Success rates are assumed to reflect sustained quitters (Alan Carr: 6-12 months, current service: 4 weeks), with no explicit relapse modeling. Users can choose to bypass intervention logic and directly input a desired reduction in smoking prevalence into the model for needs assessment purposes. E.g, where a target reduction is known users can set the prevalence change without using the modules scenario mechanisms.
+
+To override the Smoking module with a flat reduction in smoking prevalence is not possible in the interface at present, a converter has to be be added leading to "Converter 15" in place of the value received from "Prop difference in prevalence from smoking cessation" - both of which can be found on the "Local authority impacts of risk factors" page.
+
+We may want to add an optional switch / value pair to configure this as an option in the model Interface.
+
+### Technical Discussion & Questions
+
+-   **What was the rationale for modeling a stock of smokers:** It enables direct testing of interventions, rather than just adjusting risk ratios.
+
+-   There is a risk of double counting when combining underlying trends and interventions; users should be careful to avoid overlap.
+
+-   The capacity for Alan Carr is user-defined. The initial 10% figure was based on available funding at the time.
+
+-   As the number of smokers declines, the need for cessation services also decreases, this is reflected in the model's feedback.
+
+-   **Potential for further development:** There was some discussion around the potential for including more interventions, such as the introduction of the Tobacco & Bapes bill as well as other Cessation assistance. It was felt that modeling multiple simultaneous interventions may require development of a separate model for complex scenarios.
+
+## Adverse Childhood Experiences (ACE) Module
+
+### Data inputs & structure
+
+-   There are two stocks, children with and without ACE. They are arrayed by age band and ACE count (none, 1-2, 3+). The model aims to eradicate all ACE so effects start immediately.
+
+-   The main risks impacted are SMI, Asthma, and then Stoke and Heart Failure at age 25
+
+-   This includes migration flows between the stocks, mortality, and population initialization.
+
+-   Baseline and scenario flows are modeled for comparison
+
+### Intervention Logic and Scenario Modeling
+
+-   The scenario switch can eradicate new ACE cases for targeted age groups (defaults to : up to age 11), but it will not remove existing cases. New ACE cases will be completely eradicated from the chose start year - there is no ramp up, it is a hard switch.
+
+-   Age targeting can be set in the model by changing values in the ACE intervention age group converter. We may wish to add this to the interface at some date.
+
+-   The impact is tracked on incidence rates at age 25 of conditions linked to ACE, particularly SMI, asthma, and other conditions. The module will only affect the relevant age groups, there is no impact on older cohorts.
+
+-   The model includes both baseline and scenario stocks for comparison, so users can measure the change in prevalence and incidence resulting from the intervention.
+
+### Technical Details (This needs review)
+
+-   Arrays are used for prevalence data, converter "percent ACE4" initializes the first stock (ACE 0), and is used to calculate the prevalence of ACE, arrayed by none, 1, 2, and 3+.
+
+    ![](images/paste-3.png)
+
+    -   This is in a numbered array as groups 1, 2, 3 and 4.
+
+    ![](images/paste-1.png)
+
+    -   Array element 1 = 0 through to 4 which = 3+.
+
+    -   We should consider naming these as its currently unintuitive and hard to follow.
+
+-   The converter "percent ACE3" initializes the second stock for ACE 1 or more.
+
+-   The intervention does not retroactively remove existing ACE cases, it only prevents new cases from occuring.
+
+-   There are switches within the ACE module which need to be set correctly.
+
+    -   The "start time ACE impacts" switch is set to 208, which will never happen. This is because previously the model ran in weeks, so should be updated to match the current model which is run in years (1 through 25).
+
+    -   You can tailor the age group which interventions are applied to with the "ACE intervention age group" switch, currently this is set to up to 11 years old.
+
+    -   "switch ACE" will turn the module on or off. It is currently set to off.
+
+## Hypertension Module
+
+### Model Structure and Initilization
+
+-   Hypertension is modeled with three stocks: normotensive, uncontrolled hypertension, and controlled hypertension, arrayed by gender and age-band. It follows a logical progression in that stated order.
+
+-   Initialization uses prevalence data for hypertension and controlled hypertension, with converters setting the initial values for each stock.
+
+-   Migration and mortality flows are included for each stock, with risk ratios for death based on hypertension status (controlled vs. uncontrolled)
+
+### COVID-19 Impact:
+
+-   The module includes a separate chain for COVID-19, modeling increased mortality and reduced mobility - affecting progression from uncontrolled to controlled hypertension.
+
+-   Mobility adjustments are based on external data (E.g Google movement data which was tracked from mid pandemic). These effect the transition from uncontrolled to controlled hypertension. There is a separate switch for this which is turned off ("switch c19 indirect impacts")
+
+### Intervention & Scenario Modeling
+
+-   The module is currently self-contained and does not feed back into the main cohort model. It is primarily used for understanding hypertension prevalence and the impact of COVID-19 on hypertension management. It does not currently test for any specific scenarios.
+
+-   The module can be adapted to include interventions (e.g improved diagnosis, better management) by adjusting prevalence and incidence rates or adding scenario chains.
+
+-   Risk ratio reductions for controlled hypertension are implemented via converters, reducing mortality risk compared to uncontrolled hypertension.
+
+-   Should we want to look at using this for specific scenarios, the recommended starting point would be to duplicate the non-COVID hypertension chain and make changes as required for the hypothetical scenario.
+
+### Technical Details
+
+-   All stocks and flows are arrayed by gender and age band.
+
+-   The module includes outputs for total numbers in each hypertension category, which could be used to support service planning or needs assessments.
+
+-   Legacy elements are present (e.g hospital admission rates), but are not currently active. They could be reactivated if they would be useful in future analysis.
+
+-   The module is designed for flexibility and could be expanded based on future priorities - e.g ICB interest in cardiovascular disease prevention - this would likely be a new project with WSP. \>\>\>\>\>\>\> 65b216d (Add Session 6 notes)
